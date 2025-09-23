@@ -1,0 +1,81 @@
+
+#N canvas 100 100 1200 800 10;
+
+# Microphone Input and Heavy Distortion + Feedback
+#X obj 50 30 adc~;
+#X obj 50 60 *~ 5;
+#X obj 50 90 clip~ -1 1;
+#X obj 50 120 *~ 10;
+#X obj 50 150 clip~ -1 1;
+#X obj 50 180 delwrite~ micfb 500;
+#X obj 50 210 delread~ micfb 20;
+#X obj 50 240 *~ 0.6;
+#X obj 50 270 send~ mic_signal;
+
+# Connections for mic path
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 7 0 8 0;
+
+# Envelope follower (RMS)
+#X obj 300 30 receive~ mic_signal;
+#X obj 300 60 env~ 512;
+#X obj 300 90 send~ rms_signal;
+
+# Connections for envelope
+#X connect 9 0 10 0;
+#X connect 10 0 11 0;
+
+# FM-Modulated Oscillator based on RMS
+#X obj 500 30 r~ rms_signal;
+#X obj 500 60 *~ 500;
+#X obj 500 90 +~ 100;
+#X obj 500 120 osc~;
+#X obj 500 150 clip~ -0.3 0.3;
+#X obj 500 180 *~ 0.3;
+#X obj 500 210 send~ osc_signal;
+
+# Connections for oscillator
+#X connect 12 0 13 0;
+#X connect 13 0 14 0;
+#X connect 14 0 15 0;
+#X connect 15 0 16 0;
+#X connect 16 0 17 0;
+
+# Delay Feedback Modulation based on RMS
+#X obj 700 30 r~ rms_signal;
+#X obj 700 60 *~ 300;
+#X obj 700 90 +~ 20;
+#X obj 700 120 vd~ micfb;
+#X obj 700 150 *~ 0.4;
+#X obj 700 180 send~ delay_signal;
+
+# Connections for delay modulation
+#X connect 18 0 19 0;
+#X connect 19 0 20 1;
+#X connect 20 0 21 0;
+#X connect 21 0 22 0;
+
+# Mixer and Output
+#X obj 900 30 receive~ mic_signal;
+#X obj 900 60 receive~ osc_signal;
+#X obj 900 90 receive~ delay_signal;
+#X obj 900 120 +~;
+#X obj 900 150 +~;
+#X obj 900 180 clip~ -1 1;
+#X obj 900 210 *~ 0.5;
+#X obj 900 240 dac~;
+
+# Connections for mixer
+#X connect 23 0 26 0;
+#X connect 24 0 26 1;
+#X connect 26 0 27 0;
+#X connect 25 0 27 1;
+#X connect 27 0 28 0;
+#X connect 28 0 29 0;
+#X connect 29 0 30 0;

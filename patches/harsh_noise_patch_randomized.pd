@@ -1,0 +1,70 @@
+
+#N canvas 200 200 900 700 10;
+
+#X obj 100 50 noise~;
+#X obj 100 80 *~ 5;
+#X obj 100 110 hip~ 200;
+#X obj 100 140 lop~ 8000;
+#X obj 100 170 clip~ -1 1;
+#X obj 100 200 *~ 0.5;
+#X obj 100 230 send~ noise_out;
+#X obj 100 260 dac~;
+
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 5 0 6 0;
+#X connect 5 0 7 0;
+
+# Randomized Oscillator Section
+#X obj 300 50 metro 200;
+#X obj 300 80 random 800;
+#X obj 300 110 + 100;
+#X obj 300 140 pack f 100;
+#X obj 300 170 line~;
+#X obj 300 200 osc~;
+#X obj 300 230 *~ 0.3;
+#X obj 300 260 send~ osc_out;
+
+#X connect 8 0 9 0;
+#X connect 9 0 10 0;
+#X connect 10 0 11 0;
+#X connect 11 0 12 0;
+#X connect 12 0 13 0;
+#X connect 13 0 14 0;
+
+# Randomized Phasor Section
+#X obj 500 50 metro 200;
+#X obj 500 80 random 700;
+#X obj 500 110 + 50;
+#X obj 500 140 pack f 100;
+#X obj 500 170 line~;
+#X obj 500 200 phasor~;
+#X obj 500 230 *~ 0.3;
+#X obj 500 260 send~ phasor_out;
+
+#X connect 15 0 16 0;
+#X connect 16 0 17 0;
+#X connect 17 0 18 0;
+#X connect 18 0 19 0;
+#X connect 19 0 20 0;
+#X connect 20 0 21 0;
+
+# Mixing Section
+#X obj 700 50 receive~ noise_out;
+#X obj 700 80 receive~ osc_out;
+#X obj 700 110 receive~ phasor_out;
+#X obj 700 140 +~;
+#X obj 700 170 +~;
+#X obj 700 200 clip~ -1 1;
+#X obj 700 230 *~ 0.5;
+#X obj 700 260 dac~;
+
+#X connect 22 0 25 0;
+#X connect 23 0 25 1;
+#X connect 25 0 26 0;
+#X connect 24 0 26 1;
+#X connect 26 0 27 0;
+#X connect 27 0 28 0;
