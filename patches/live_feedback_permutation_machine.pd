@@ -1,4 +1,3 @@
-
 #N canvas 100 100 1200 800 10;
 
 # Microphone Input and Feedback
@@ -34,30 +33,44 @@
 #X obj 400 80 *~ 1000;
 #X obj 400 110 +~ 200;
 #X obj 400 140 osc~;
-#X obj 400 170 *~ 0.2;
+#X obj 400 170 *~;
 #X obj 400 200 send~ osc_signal;
+#X obj 520 50 r rms_value;
+#X obj 520 80 / 100;
+#X obj 520 110 clip 0 1;
+#X obj 520 140 * 0.35;
+#X obj 520 170 + 0.05;
+#X obj 520 200 sig~;
 
 #X connect 12 0 13 0;
 #X connect 13 0 14 0;
 #X connect 14 0 15 0;
 #X connect 15 0 16 0;
+#X connect 16 0 17 0;
+#X connect 18 0 19 0;
+#X connect 19 0 20 0;
+#X connect 20 0 21 0;
+#X connect 21 0 22 0;
+#X connect 22 0 23 0;
+#X connect 23 0 16 1;
 
 # Delay Modulation Based on RMS
 #X obj 600 50 r rms_value;
 #X obj 600 80 / 100;
 #X obj 600 110 + 20;
-#X obj 600 140 line;
-#X obj 600 170 pack f 100;
+#X obj 600 140 pack f 100;
+#X obj 600 170 line;
 #X obj 600 200 delread~ micfb;
 #X obj 600 230 *~ 0.3;
 #X obj 600 260 send~ delay_signal;
 
-#X connect 17 0 18 0;
-#X connect 18 0 19 0;
-#X connect 19 0 21 0;
-#X connect 21 0 22 0;
-#X connect 20 0 21 1;
-#X connect 22 0 23 0;
+#X connect 24 0 25 0;
+#X connect 25 0 26 0;
+#X connect 26 0 27 0;
+#X connect 27 0 28 0;
+#X connect 28 0 29 0;
+#X connect 29 0 30 0;
+#X connect 30 0 31 0;
 
 # Mixer and Output
 #X obj 800 50 receive~ mic_signal;
@@ -69,16 +82,18 @@
 #X obj 800 230 *~ 0.5;
 #X obj 800 260 dac~;
 
-#X connect 24 0 27 0;
-#X connect 25 0 27 1;
-#X connect 27 0 28 0;
-#X connect 26 0 28 1;
-#X connect 28 0 29 0;
-#X connect 29 0 30 0;
-#X connect 30 0 31 0;
+#X connect 32 0 35 0;
+#X connect 33 0 35 1;
+#X connect 35 0 36 0;
+#X connect 34 0 36 1;
+#X connect 36 0 37 0;
+#X connect 37 0 38 0;
+#X connect 38 0 39 0;
+#X connect 38 0 39 1;
 
 # Start the metro
 #X obj 200 230 loadbang;
 #X obj 200 260 bang;
-#X connect 32 0 33 0;
-#X connect 33 0 9 0;
+
+#X connect 40 0 41 0;
+#X connect 41 0 9 0;
