@@ -4,7 +4,7 @@
 #X obj 100 100 +~ 220;
 #X obj 150 100 phasor~;
 #X obj 150 150 *~ 0.2;
-#X obj 200 100 * 3.14159;
+#X obj 200 100 *~ 3.14159;
 #X obj 250 100 phasor~;
 #X obj 250 150 *~ 0.1;
 #X obj 300 50 noise~;
