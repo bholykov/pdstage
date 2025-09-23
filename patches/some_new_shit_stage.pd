@@ -12,7 +12,7 @@
 #X obj 335 252 lop~ -100;
 #X obj 335 295 +~ 1500;
 #X obj 325 338 *~ 0.15;
-#X obj 428 214 1 0 20;
+#X msg 428 214 1 0 20;
 #X obj 431 260 noise~;
 #X obj 555 43 tgl 25 0 stage/noise/start stage/noise/start empty 17 7 0 10 #e4e4e4 #4d4d4d #373737 0 1;
 #X obj 487 105 bng 25 250 50 0 empty empty empty 17 7 0 10 #e4e4e4 #4d4d4d #373737;
