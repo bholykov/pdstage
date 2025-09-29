@@ -1,12 +1,4 @@
 # PlugData Stage Controller
 
-`stage_main.pd` is a top-level PlugData/Pure Data patch that orchestrates five of your existing modules from `Documents/Pd`. It loads the abstractions under `patches/`, exposes simple transport controls for each, and mixes them through a shared master bus.
-
-## Running tests
-
-The repository includes a lightweight structural harness to exercise the source generator patch wiring without requiring libpd. Run the automated checks with:
-
-```sh
-pytest
-```
+`stage_main.pd` is a top-level PlugData/Pure Data patch that orchestrates modules. It loads the abstractions under `patches/`, exposes simple transport controls for each, and mixes them through a shared master bus.
 

@@ -28,8 +28,7 @@
 #X connect 6 0 7 0;
 #X connect 7 0 8 0;
 #X connect 9 0 8 1;
-#X connect 8 0 10 0;
-#X connect 9 0 10 0; 
+#X connect 8 0 10 0; 
 
 # FM-Modulated Oscillator based on RMS
 #X obj 500 30 r rms_value;
